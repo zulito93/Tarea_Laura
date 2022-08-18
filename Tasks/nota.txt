@@ -1,0 +1,12 @@
+<!DOCTYPE html> en que version de html voy a trabajar en este caso es html5
+<html lang="en">  idioma en el que va a esta mi contenido
+<head> cabecera de la pagina
+    <meta charset="UTF-8"> lista de codigos validos para mi pagina
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> para que la pagina sea responsive (viewport)
+    <title>Document</title>  titulo del documento
+</head>
+<body> cuerpo de la pagina
+    
+</body>
+</html>
