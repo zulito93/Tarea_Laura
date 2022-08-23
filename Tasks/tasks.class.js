@@ -6,7 +6,7 @@ class Tasks {
   }
 
   getTask(id) {
-    return this.taskList.find((task) => task.id === id);
+    return this.taskList.find((task) => task.id == id);
   }
 
   addTask(task) {
@@ -20,15 +20,6 @@ class Tasks {
     }
   }
 
-  finishTask(status, id) {
-    if (!status) {
-        const index = this.taskList.findIndex((value)=> {
-            return value.id == id;
-        });
-        this.taskList[index].done = true;
-    }
-}
-
   editTask(id, property, value) {
     this.taskList = this.taskList.map((task) => {
       if (task.id == id) {
@@ -40,6 +31,12 @@ class Tasks {
 
   deleteTask(id) {
     this.taskList = this.taskList.filter((task) => task.id !== id);
+  }
+
+  index(id){
+    return this.taskList.findIndex((value) => {
+      return value.id == id;
+    });
   }
 }
 

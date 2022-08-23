@@ -82,13 +82,32 @@ import Tasks from "./Tasks.class.js";
   //Enviar boton requerido a funcion
   const btnAction = e => {
     if (e.target.classList.contains('tasksItemAction-done')){
-        tasks.finishTask(e.target.dataset.done,e.target.dataset.id);
+        tasks.editTask(e.target.dataset.id,"done",true);
     }
     if (e.target.classList.contains('tasksItemAction-edit')){
-        const activity = tasks.getTask(e.target.dataset.id);
-        alertify .prompt("Editar tarea", "Ingrese una tarea", activity)
-        tasks.editTask(e.target.dataset.id, 'activity', 'Prueba');
+        const taskList = tasks.getTasks();
+        const index = tasks.index(e.target.dataset.id);
+        const activity = taskList[index].activity;
+
+        alertify .prompt("Editar tarea", "Ingrese una tarea", activity,
+        function (evt, value) {
+          if ((value && value === activity) || !value) {
+            showNotification("error", "No se ha editado la tarea");
+            return false;
+          }
+
+          if (!taskExists(value)) {
+            return false;
+          }
+
+          tasks.editTask(e.target.dataset.id, "activity", value);
+          showNotification("success", "Actividad editada");
+          showTasks();
+        },
+        null
+        )
+        .set("labels", { ok: "Editar", cancel: "Cancelar" });
     }
-    showTasks();
+
   }
 })(Tasks);
