@@ -1,24 +1,32 @@
 const imagen = document.getElementById("imagen");
 
-let showImage = () => {
-    return new Promise((resolve, reject)=> {
-    img = new Image();
-    img.src = "./Gallery2.jpg";
-    imagen.innerHTML = "";
-    imagen.setAttribute("class", imagen);
+
+
+let showImage = () => new Promise((resolve, reject) => {
+    let img = new Image();
+    img.src = "./Gallery.jpg";
     img.onload = () =>{
-            resolve();
-            //resolve(imagen.append(img));
+        resolve(img);
     }
-    img.onerror =() => {
-        reject(new Error(alert("Error al cargar")))
+    img.onerror = () =>{
+        reject(console.log("Entre a rej"));
     }
-    
-})
-}
+
+});
 
 function btn1(){
-    const promesa = showImage();
-    promesa.then(imagen.src = "./Gallery.jpg")
-    .catch()
+    showImage().
+    then(res =>{
+        document.getElementById("imagen").append(res)
+    })
+    .catch(error =>{
+        alert("Error la imagen no pudo ser encontrada")
+    })
+    
+}
+
+async function btn2(){
+    const img = await showImage();
+    document.getElementById("imagen").append(img)
+    console.log("Hello")
 }
